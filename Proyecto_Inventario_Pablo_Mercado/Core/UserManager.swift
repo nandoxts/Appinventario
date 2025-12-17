@@ -68,15 +68,15 @@ final class UserManager {
     }
 
     // MARK: - CRUD
-    func createUser(name: String, email: String, password: String, role: UserRole) -> Result<Void, String> {
+    func createUser(name: String, email: String, password: String, role: UserRole) -> Result<Void, UserError> {
         load()
 
-        guard !name.isEmpty else { return .failure("Nombre inválido") }
-        guard email.contains("@") else { return .failure("Correo inválido") }
-        guard password.count >= 4 else { return .failure("Contraseña muy corta") }
+        guard !name.isEmpty else { return .failure(.invalidName) }
+        guard email.contains("@") else { return .failure(.invalidEmail) }
+        guard password.count >= 4 else { return .failure(.passwordTooShort) }
 
         if users.contains(where: { $0.email.lowercased() == email.lowercased() }) {
-            return .failure("El correo ya existe")
+            return .failure(.emailAlreadyExists)
         }
 
         users.append(AppUser(
