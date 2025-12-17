@@ -11,7 +11,11 @@ class TransactionListViewController: UIViewController {
         view.backgroundColor = .systemGroupedBackground
 
         setupTable()
-        setupAddButton()
+        
+        // Solo admin puede agregar transacciones
+        if isAdmin() {
+            setupAddButton()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,8 +44,8 @@ class TransactionListViewController: UIViewController {
         )
     }
 
-    @objc private func addTransaction() {
-        let formVC = TransactionFormViewController()
+    @objc private func addTransaction() {        if !requireAdmin() { return }
+                let formVC = TransactionFormViewController()
         navigationController?.pushViewController(formVC, animated: true)
     }
 }

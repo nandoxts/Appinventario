@@ -22,5 +22,26 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    
+    // MARK: - Role-based access
+    func isAdmin() -> Bool {
+        return UserManager.shared.currentRole() == .admin
+    }
+    
+    func isWorker() -> Bool {
+        return UserManager.shared.currentRole() == .worker
+    }
+    
+    func getCurrentRole() -> UserRole {
+        return UserManager.shared.currentRole()
+    }
+    
+    func requireAdmin() -> Bool {
+        if !isAdmin() {
+            showAlert("Esta accion solo puede ser realizada por administradores")
+            return false
+        }
+        return true
+    }
 }
 

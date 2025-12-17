@@ -135,8 +135,7 @@ class ProfilePopupViewController: UIViewController {
     }
 
     @objc private func logoutTapped() {
-        UserDefaults.standard.removeObject(forKey: "username")
-        UserDefaults.standard.removeObject(forKey: "email")
+        UserManager.shared.logout()
 
         if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate {
             let loginVC = LoginViewController()

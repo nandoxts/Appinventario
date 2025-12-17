@@ -30,13 +30,17 @@ class HomeViewController: UIViewController {
         let reportsCard = DashboardButton(title: "Reportes", subtitle: "Resumen y alertas", icon: "chart.bar.fill", color: .systemOrange)
         reportsCard.addTarget(self, action: #selector(goReports), for: .touchUpInside)
 
+        var cards: [UIView] = [welcomeLabel, productsCard, transactionsCard, reportsCard]
+        
+        // Mostrar usuarios solo si es admin
+        if isAdmin() {
+            let usersCard = DashboardButton(title: "Usuarios", subtitle: "Gestionar trabajadores", icon: "person.2.fill", color: .systemPurple)
+            usersCard.addTarget(self, action: #selector(goUsers), for: .touchUpInside)
+            cards.append(usersCard)
+        }
+    
         // Stack vertical
-        let stack = UIStackView(arrangedSubviews: [
-            welcomeLabel,
-            productsCard,
-            transactionsCard,
-            reportsCard
-        ])
+        let stack = UIStackView(arrangedSubviews: cards)
         stack.axis = .vertical
         stack.spacing = 20
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -80,8 +84,9 @@ class HomeViewController: UIViewController {
 
     private func updateWelcomeLabel() {
         let username = UserDefaults.standard.string(forKey: "username") ?? "Usuario"
-        welcomeLabel.text = "¡Bienvenido, \(username)!"
-        welcomeLabel.font = .boldSystemFont(ofSize: 24)
+        let role = getCurrentRole().displayName
+        welcomeLabel.text = "¡Bienvenido, \(username)!\n(\(role))"
+        welcomeLabel.font = .boldSystemFont(ofSize: 20)
         welcomeLabel.textAlignment = .center
         welcomeLabel.numberOfLines = 0
     }
@@ -102,9 +107,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func logoutTapped() {
-        UserDefaults.standard.removeObject(forKey: "username")
-        UserDefaults.standard.removeObject(forKey: "email")
-
+        UserManager.shared.logout()
         let loginVC = LoginViewController()
         let navController = UINavigationController(rootViewController: loginVC)
 
@@ -117,4 +120,5 @@ class HomeViewController: UIViewController {
     @objc private func goProducts() { navigationController?.pushViewController(ProductListViewController(), animated: true) }
     @objc private func goTransactions() { navigationController?.pushViewController(TransactionListViewController(), animated: true) }
     @objc private func goReports() { navigationController?.pushViewController(ReportsViewController(), animated: true) }
+    @objc private func goUsers() { navigationController?.pushViewController(UserListViewController(), animated: true) }
 }

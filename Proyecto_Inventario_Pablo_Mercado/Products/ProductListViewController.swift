@@ -10,7 +10,11 @@ class ProductListViewController: UIViewController {
         title = "Productos"
         view.backgroundColor = .systemGroupedBackground
         setupTable()
-        setupAddButton()
+        
+        // Boton agregar solo para admin
+        if isAdmin() {
+            setupAddButton()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +45,8 @@ class ProductListViewController: UIViewController {
     }
 
     @objc private func addProduct() {
+        if !requireAdmin() { return }
+        
         let form = ProductFormViewController {
             // No necesitamos actualizar la tabla aquí
         }
