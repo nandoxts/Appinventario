@@ -18,7 +18,23 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        setupUI()
+        
+        // Si no hay usuarios, crear admin inicial
+        if !viewModel.hasUsers() {
+            showCreateAdminFlow()
+        } else {
+            setupUI()
+        }
+    }
+    
+    private func showCreateAdminFlow() {
+        let createAdminVC = CreateAdminViewController()
+        let navController = UINavigationController(rootViewController: createAdminVC)
+        
+        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = navController
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
     }
 
     private func setupUI() {
