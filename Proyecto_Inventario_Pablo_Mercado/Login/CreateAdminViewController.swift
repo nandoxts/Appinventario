@@ -38,8 +38,8 @@ class CreateAdminViewController: UIViewController {
         switch result {
         case .success:
             navigationController?.popViewController(animated: true)
-        case .failure(let msg):
-            showAlert(msg)
+        case .failure(let error):
+            showAlert(error.localizedDescription)
         }
     }
 }
