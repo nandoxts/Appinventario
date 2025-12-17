@@ -43,6 +43,12 @@
 		B5D223B92EF06B1000C4880D /* LowStockTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223B82EF06B1000C4880D /* LowStockTableView.swift */; };
 		B5D223BB2EF06C8A00C4880D /* ProfilePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223BA2EF06C8A00C4880D /* ProfilePopupViewController.swift */; };
 		B5D223BD2EF0764F00C4880D /* ProductCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223BC2EF0764F00C4880D /* ProductCategory.swift */; };
+		B5E223BE2EF0765000C4880D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223BF2EF0765100C4880D /* UserManager.swift */; };
+		B5E223C02EF0765200C4880D /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C12EF0765300C4880D /* AppUser.swift */; };
+		B5E223C22EF0765400C4880D /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C32EF0765500C4880D /* UserRole.swift */; };
+		B5E223C42EF0765600C4880D /* CreateAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C52EF0765700C4880D /* CreateAdminViewController.swift */; };
+		B5E223C62EF0765800C4880D /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C72EF0765900C4880D /* UserListViewController.swift */; };
+		B5E223C82EF0765A00C4880D /* UserFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C92EF0765B00C4880D /* UserFormViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +90,12 @@
 		B5D223B82EF06B1000C4880D /* LowStockTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowStockTableView.swift; sourceTree = "<group>"; };
 		B5D223BA2EF06C8A00C4880D /* ProfilePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePopupViewController.swift; sourceTree = "<group>"; };
 		B5D223BC2EF0764F00C4880D /* ProductCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategory.swift; sourceTree = "<group>"; };
+		B5E223BF2EF0765100C4880D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		B5E223C12EF0765300C4880D /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		B5E223C32EF0765500C4880D /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		B5E223C52EF0765700C4880D /* CreateAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAdminViewController.swift; sourceTree = "<group>"; };
+		B5E223C72EF0765900C4880D /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		B5E223C92EF0765B00C4880D /* UserFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFormViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +128,7 @@
 		B5D223602EF05FCE00C4880D /* Proyecto_Inventario_Pablo_Mercado */ = {
 			isa = PBXGroup;
 			children = (
+				B5E223CA2EF0765C00C4880D /* Users */,
 				B5D223B12EF0680600C4880D /* Splash */,
 				B5D223A92EF065D800C4880D /* Reporte */,
 				B5D2239C2EF062C100C4880D /* Extension */,
@@ -150,6 +163,7 @@
 			children = (
 				B5D223862EF0608C00C4880D /* LoginViewController.swift */,
 				B5D223872EF0608C00C4880D /* LoginViewModel.swift */,
+				B5E223C52EF0765700C4880D /* CreateAdminViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -161,6 +175,8 @@
 				B5D2238C2EF0609B00C4880D /* Transaction.swift */,
 				B5D2238B2EF0609B00C4880D /* User.swift */,
 				B5D223BC2EF0764F00C4880D /* ProductCategory.swift */,
+				B5E223C12EF0765300C4880D /* AppUser.swift */,
+				B5E223C32EF0765500C4880D /* UserRole.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,6 +186,7 @@
 			children = (
 				B5D2237C2EF0606D00C4880D /* Constants.swift */,
 				B5D2237D2EF0606D00C4880D /* DataManager.swift */,
+				B5E223BF2EF0765100C4880D /* UserManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -227,6 +244,15 @@
 				B5D223B22EF0681B00C4880D /* SplashViewController.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		B5E223CA2EF0765C00C4880D /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				B5E223C72EF0765900C4880D /* UserListViewController.swift */,
+				B5E223C92EF0765B00C4880D /* UserFormViewController.swift */,
+			);
+			path = Users;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +359,12 @@
 				B5D223A62EF064C900C4880D /* ProductCell.swift in Sources */,
 				B5D223952EF060A600C4880D /* ProductViewModel.swift in Sources */,
 				B5D2237F2EF0606D00C4880D /* Constants.swift in Sources */,
+				B5E223BE2EF0765000C4880D /* UserManager.swift in Sources */,
+				B5E223C02EF0765200C4880D /* AppUser.swift in Sources */,
+				B5E223C22EF0765400C4880D /* UserRole.swift in Sources */,
+				B5E223C42EF0765600C4880D /* CreateAdminViewController.swift in Sources */,
+				B5E223C62EF0765800C4880D /* UserListViewController.swift in Sources */,
+				B5E223C82EF0765A00C4880D /* UserFormViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
