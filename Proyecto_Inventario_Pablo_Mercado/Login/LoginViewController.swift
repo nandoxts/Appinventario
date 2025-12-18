@@ -18,36 +18,63 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
-        // Si no hay usuarios, crear admin inicial
+
+        setupUI()
+
+        // ⚠️ Si no hay usuarios, redirigir a crear admin
         if !viewModel.hasUsers() {
-            showCreateAdminFlow()
-        } else {
-            setupUI()
-        }
-    }
-    
-    private func showCreateAdminFlow() {
-        let createAdminVC = CreateAdminViewController()
-        let navController = UINavigationController(rootViewController: createAdminVC)
-        
-        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = navController
-            sceneDelegate.window?.makeKeyAndVisible()
+            goToCreateAdmin()
         }
     }
 
+    // MARK: - Actions
+
+    @objc private func loginTapped() {
+
+        guard
+            let email = emailTF.text, !email.isEmpty,
+            let password = passwordTF.text, !password.isEmpty
+        else {
+            showAlert("Todos los campos son obligatorios")
+            return
+        }
+
+        if viewModel.login(email: email, password: password) {
+            goToHome()
+        } else {
+            showAlert("Credenciales incorrectas")
+        }
+    }
+
+    // MARK: - Navigation (centralizada)
+
+    private func goToHome() {
+        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate {
+            sceneDelegate.setRoot(.home)
+        }
+    }
+
+    private func goToCreateAdmin() {
+        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate {
+            sceneDelegate.setRoot(.createAdmin)
+        }
+    }
+
+    // MARK: - UI
+
     private func setupUI() {
-        // Logo
+
         logoImageView.image = UIImage(systemName: "cube.box.fill")
         logoImageView.tintColor = .systemBlue
         logoImageView.contentMode = .scaleAspectFit
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
 
-        // Acción botón
-        loginButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+        loginButton.addTarget(
+            self,
+            action: #selector(loginTapped),
+            for: .touchUpInside
+        )
 
-        // Stack principal
         let stack = UIStackView(arrangedSubviews: [
             logoImageView,
             emailTF,
@@ -67,27 +94,5 @@ class LoginViewController: UIViewController {
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             stack.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-    }
-
-    @objc private func loginTapped() {
-        guard
-            let email = emailTF.text, !email.isEmpty,
-            let password = passwordTF.text, !password.isEmpty
-        else {
-            showAlert("Todos los campos son obligatorios")
-            return
-        }
-
-        if viewModel.login(email: email, password: password) {
-            let homeVC = HomeViewController()
-            let navController = UINavigationController(rootViewController: homeVC)
-
-            if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate {
-                sceneDelegate.window?.rootViewController = navController
-                sceneDelegate.window?.makeKeyAndVisible()
-            }
-        } else {
-            showAlert("Credenciales incorrectas")
-        }
     }
 }

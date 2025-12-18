@@ -10,10 +10,28 @@ import Foundation
 final class UserManager {
 
     static let shared = UserManager()
-    private init() {}
+    private init() {
+        setupDefaultAdmin()
+    }
 
     private var users: [AppUser] = []
     private let defaults = UserDefaults.standard
+
+    // MARK: - Admin por defecto
+    private func setupDefaultAdmin() {
+        load()
+        if users.isEmpty {
+            let defaultAdmin = AppUser(
+                id: UUID(),
+                name: "Admin",
+                email: "admin@example.com",
+                password: "1234",
+                role: .admin
+            )
+            users.append(defaultAdmin)
+            save()
+        }
+    }
 
     // MARK: - Persistencia
     private func load() {
