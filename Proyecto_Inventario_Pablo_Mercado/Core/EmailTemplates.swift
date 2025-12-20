@@ -75,7 +75,7 @@ Recuperar contraseña
         let htmlContent = """
 <html>
 <body style="font-family: Arial, sans-serif; color: #333;">
-<h2 style="color: #FF3B30;">⚠️ Alerta: Stock bajo</h2>
+<h2 style="color: #FF3B30;">Alerta: Stock bajo</h2>
 <p>El siguiente producto tiene stock bajo:</p>
 <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
 <tr style="background-color: #f5f5f5;">

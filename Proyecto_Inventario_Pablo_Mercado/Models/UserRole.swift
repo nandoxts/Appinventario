@@ -14,6 +14,7 @@ enum UserError: Error, LocalizedError {
     case emailAlreadyExists
     case invalidCredentials
     case unknown(String)
+    case userNotFound
     
     var errorDescription: String? {
         switch self {
@@ -29,6 +30,8 @@ enum UserError: Error, LocalizedError {
             return "Credenciales incorrectas"
         case .unknown(let msg):
             return msg
+        case .userNotFound:
+            return "Usuario no encontrado"
         }
     }
 }

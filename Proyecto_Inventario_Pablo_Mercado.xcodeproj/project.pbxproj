@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B59B21502EF62E64006F4DD4 /* TransactionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59B214F2EF62E64006F4DD4 /* TransactionAPI.swift */; };
 		B5D223622EF05FCE00C4880D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223612EF05FCE00C4880D /* AppDelegate.swift */; };
 		B5D223642EF05FCE00C4880D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223632EF05FCE00C4880D /* SceneDelegate.swift */; };
 		B5D223662EF05FCE00C4880D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223652EF05FCE00C4880D /* ViewController.swift */; };
@@ -49,12 +50,10 @@
 		B5E223C42EF0765600C4880D /* CreateAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C52EF0765700C4880D /* CreateAdminViewController.swift */; };
 		B5E223C62EF0765800C4880D /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C72EF0765900C4880D /* UserListViewController.swift */; };
 		B5E223C82EF0765A00C4880D /* UserFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C92EF0765B00C4880D /* UserFormViewController.swift */; };
-		B5F223CD2EF0766300C4880D /* EmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CA2EF0766000C4880D /* EmailService.swift */; };
-		B5F223CE2EF0766400C4880D /* TransactionEmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CB2EF0766100C4880D /* TransactionEmailService.swift */; };
-		B5F223CF2EF0766500C4880D /* EmailTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CC2EF0766200C4880D /* EmailTemplates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B59B214F2EF62E64006F4DD4 /* TransactionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAPI.swift; sourceTree = "<group>"; };
 		B5D2235E2EF05FCE00C4880D /* Proyecto_Inventario_Pablo_Mercado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proyecto_Inventario_Pablo_Mercado.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D223612EF05FCE00C4880D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5D223632EF05FCE00C4880D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,9 +98,6 @@
 		B5E223C52EF0765700C4880D /* CreateAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAdminViewController.swift; sourceTree = "<group>"; };
 		B5E223C72EF0765900C4880D /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		B5E223C92EF0765B00C4880D /* UserFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFormViewController.swift; sourceTree = "<group>"; };
-		B5F223CA2EF0766000C4880D /* EmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailService.swift; sourceTree = "<group>"; };
-		B5F223CB2EF0766100C4880D /* TransactionEmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEmailService.swift; sourceTree = "<group>"; };
-		B5F223CC2EF0766200C4880D /* EmailTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTemplates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,9 +189,6 @@
 				B5D2237C2EF0606D00C4880D /* Constants.swift */,
 				B5D2237D2EF0606D00C4880D /* DataManager.swift */,
 				B5E223BF2EF0765100C4880D /* UserManager.swift */,
-				B5F223CA2EF0766000C4880D /* EmailService.swift */,
-				B5F223CB2EF0766100C4880D /* TransactionEmailService.swift */,
-				B5F223CC2EF0766200C4880D /* EmailTemplates.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -218,6 +211,7 @@
 				B5D223982EF060AF00C4880D /* TransactionListViewController.swift */,
 				B5D223962EF060AF00C4880D /* TransactionViewModel.swift */,
 				B5D223B62EF06A8600C4880D /* TransactionTableView.swift */,
+				B59B214F2EF62E64006F4DD4 /* TransactionAPI.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -374,9 +368,7 @@
 				B5E223C42EF0765600C4880D /* CreateAdminViewController.swift in Sources */,
 				B5E223C62EF0765800C4880D /* UserListViewController.swift in Sources */,
 				B5E223C82EF0765A00C4880D /* UserFormViewController.swift in Sources */,
-				B5F223CD2EF0766300C4880D /* EmailService.swift in Sources */,
-				B5F223CE2EF0766400C4880D /* TransactionEmailService.swift in Sources */,
-				B5F223CF2EF0766500C4880D /* EmailTemplates.swift in Sources */,
+				B59B21502EF62E64006F4DD4 /* TransactionAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

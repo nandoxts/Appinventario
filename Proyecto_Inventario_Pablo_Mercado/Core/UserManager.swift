@@ -1,9 +1,3 @@
-//
-//  UserManager.swift
-//  
-//
-//  Created by Invitado on 16/12/25.
-//
 
 import Foundation
 
@@ -64,16 +58,6 @@ final class UserManager {
         return UserRole(rawValue: raw) ?? .worker
     }
 
-    // MARK: - Current User
-    var currentUser: AppUser? {
-        load()
-        guard let userId = defaults.string(forKey: Constants.userId),
-              let uuid = UUID(uuidString: userId) else {
-            return nil
-        }
-        return users.first { $0.id == uuid }
-    }
-
     // MARK: - Auth
     func login(email: String, password: String) -> Bool {
         load()
@@ -123,4 +107,19 @@ final class UserManager {
         users.removeAll { $0.id == id }
         save()
     }
+    
+    func updateUser(id: UUID, name: String, email: String, role: UserRole) -> Result<Void, UserError> {
+        load()
+        guard let index = users.firstIndex(where: { $0.id == id }) else {
+            return .failure(.userNotFound)
+        }
+
+        users[index].name = name
+        users[index].email = email
+        users[index].role = role
+
+        save()
+        return .success(())
+    }
+
 }

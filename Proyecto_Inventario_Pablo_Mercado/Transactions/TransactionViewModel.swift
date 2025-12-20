@@ -39,7 +39,7 @@ class TransactionViewModel {
         }
 
         let transaction = Transaction(
-            id: UUID(),
+            id: UUID().uuidString,
             productId: product.id,
             productName: product.name,
             quantity: quantity,
@@ -74,4 +74,3 @@ class TransactionViewModel {
         )
     }
 }
-

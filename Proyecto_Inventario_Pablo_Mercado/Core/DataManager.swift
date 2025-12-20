@@ -3,18 +3,62 @@ import Foundation
 final class DataManager {
 
     static let shared = DataManager()
-    private init() {}
+    private init() {
+        loadProducts()
+        loadTransactions()
+    }
 
     private(set) var products: [Product] = []
     private(set) var transactions: [Transaction] = []
+    private var nextProductId: Int = 1
 
     private let queue = DispatchQueue(label: "DataManagerQueue", attributes: .concurrent)
+    private let defaults = UserDefaults.standard
+    
+    // MARK: - Keys
+    private let productsKey = "productsStore"
+    private let transactionsKey = "transactionsStore"
+    private let nextIdKey = "nextProductId"
+    
+    // MARK: - Persistencia
+    private func loadProducts() {
+        if let data = defaults.data(forKey: productsKey),
+           let decoded = try? JSONDecoder().decode([Product].self, from: data) {
+            products = decoded
+        }
+        nextProductId = defaults.integer(forKey: nextIdKey)
+        if nextProductId == 0 { nextProductId = 1 }
+    }
+    
+    private func saveProducts() {
+        if let data = try? JSONEncoder().encode(products) {
+            defaults.set(data, forKey: productsKey)
+        }
+        defaults.set(nextProductId, forKey: nextIdKey)
+    }
+    
+    private func loadTransactions() {
+        if let data = defaults.data(forKey: transactionsKey),
+           let decoded = try? JSONDecoder().decode([Transaction].self, from: data) {
+            transactions = decoded
+        }
+    }
+    
+    private func saveTransactions() {
+        if let data = try? JSONEncoder().encode(transactions) {
+            defaults.set(data, forKey: transactionsKey)
+        }
+    }
 
     // MARK: - Products
     @discardableResult
     func addProduct(_ product: Product) -> Bool {
         queue.async(flags: .barrier) {
-            self.products.append(product)
+            var newProduct = product
+            newProduct = Product(id: self.nextProductId, name: product.name, price: product.price, stock: product.stock, category: product.category)
+            self.nextProductId += 1
+            self.products.append(newProduct)
+            self.saveProducts()
         }
         return true
     }
@@ -26,23 +70,27 @@ final class DataManager {
             if let index = self.products.firstIndex(where: { $0.id == product.id }) {
                 self.products[index] = product
                 updated = true
+                self.saveProducts()
             }
         }
         return updated
     }
 
-    @discardableResult
-    func deleteProduct(id: UUID) -> Bool {
-        var deleted = false
+    func deleteProduct(id: Int, completion: @escaping (Bool) -> Void) {
         queue.async(flags: .barrier) {
             let originalCount = self.products.count
             self.products.removeAll { $0.id == id }
-            deleted = self.products.count < originalCount
+            let deleted = self.products.count < originalCount
+            self.saveProducts()
+
+            DispatchQueue.main.async {
+                completion(deleted)
+            }
         }
-        return deleted
     }
 
-    func getProduct(by id: UUID) -> Product? {
+
+    func getProduct(by id: Int) -> Product? {
         queue.sync {
             products.first { $0.id == id }
         }
@@ -73,13 +121,15 @@ final class DataManager {
 
             products[index] = product
             transactions.append(transaction)
+            saveProducts()
+            saveTransactions()
             success = true
         }
         return success
     }
 
     @discardableResult
-    func deleteTransaction(id: UUID) -> Bool {
+    func deleteTransaction(id: String) -> Bool {
         var success = false
         queue.sync(flags: .barrier) {
             guard let transactionIndex = transactions.firstIndex(where: { $0.id == id }) else {
@@ -101,6 +151,8 @@ final class DataManager {
             }
 
             transactions.remove(at: transactionIndex)
+            saveProducts()
+            saveTransactions()
             success = true
         }
         return success

@@ -8,9 +8,11 @@ class UserFormViewController: UIViewController {
     let roleSegment = UISegmentedControl(items: ["Admin", "Trabajador"])
     let saveBtn = UIButton.primary(title: "Guardar")
 
+    private let user: AppUser?
     let completion: () -> Void
 
-    init(completion: @escaping () -> Void) {
+    init(user: AppUser? = nil, completion: @escaping () -> Void) {
+        self.user = user
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
     }
@@ -19,9 +21,18 @@ class UserFormViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Nuevo Usuario"
+
+        title = user == nil ? "Nuevo Usuario" : "Editar Usuario"
         view.backgroundColor = .systemBackground
-        roleSegment.selectedSegmentIndex = 1
+
+        if let user = user {
+            nameTF.text = user.name
+            emailTF.text = user.email
+            roleSegment.selectedSegmentIndex = user.role == .admin ? 0 : 1
+            passTF.isHidden = true
+        } else {
+            roleSegment.selectedSegmentIndex = 1
+        }
 
         saveBtn.addTarget(self, action: #selector(save), for: .touchUpInside)
 
@@ -43,12 +54,23 @@ class UserFormViewController: UIViewController {
     @objc private func save() {
         let role: UserRole = roleSegment.selectedSegmentIndex == 0 ? .admin : .worker
 
-        let result = UserManager.shared.createUser(
-            name: nameTF.text ?? "",
-            email: emailTF.text ?? "",
-            password: passTF.text ?? "",
-            role: role
-        )
+        let result: Result<Void, UserError>
+
+        if let user = user {
+            result = UserManager.shared.updateUser(
+                id: user.id,
+                name: nameTF.text ?? "",
+                email: emailTF.text ?? "",
+                role: role
+            )
+        } else {
+            result = UserManager.shared.createUser(
+                name: nameTF.text ?? "",
+                email: emailTF.text ?? "",
+                password: passTF.text ?? "",
+                role: role
+            )
+        }
 
         switch result {
         case .success:
@@ -59,3 +81,4 @@ class UserFormViewController: UIViewController {
         }
     }
 }
+

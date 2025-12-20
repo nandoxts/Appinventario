@@ -25,7 +25,7 @@ class ProductViewModel {
         guard let price = Double(priceText), price >= 0 else { return .failure(.invalidPrice) }
         guard let stock = Int(stockText), stock >= 0 else { return .failure(.invalidStock) }
 
-        let product = Product(id: UUID(), name: name, price: price, stock: stock, category: category)
+        let product = Product(id: 0, name: name, price: price, stock: stock, category: category)
         DataManager.shared.addProduct(product)
         return .success(())
     }
@@ -34,7 +34,10 @@ class ProductViewModel {
         DataManager.shared.updateProduct(product)
     }
 
-    func deleteProduct(id: UUID) {
-        DataManager.shared.deleteProduct(id: id)
+    func deleteProduct(id: Int, completion: @escaping (Bool) -> Void) {
+        DataManager.shared.deleteProduct(id: id) { success in
+            completion(success)
+        }
     }
+
 }

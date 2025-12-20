@@ -111,6 +111,31 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let user = filteredUsers[indexPath.row]
+
+        let sheet = UIAlertController(
+            title: user.name,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        sheet.addAction(UIAlertAction(title: "Editar", style: .default) { [weak self] _ in
+            self?.editUser(user)
+        })
+
+        sheet.addAction(UIAlertAction(title: "Eliminar", style: .destructive) { [weak self] _ in
+            self?.confirmDelete(user)
+        })
+
+        sheet.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+
+        present(sheet, animated: true)
+    }
+
 
     // MARK: - UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -125,4 +150,27 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.reloadData()
         updateEmptyState()
     }
+    
+    private func confirmDelete(_ user: AppUser) {
+        let alert = UIAlertController(
+            title: "Eliminar usuario",
+            message: "¿Seguro que deseas eliminar a \(user.name)?",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Eliminar", style: .destructive) { [weak self] _ in
+            UserManager.shared.deleteUser(id: user.id)
+            self?.reload()
+        })
+
+        present(alert, animated: true)
+    }
+    private func editUser(_ user: AppUser) {
+        let vc = UserFormViewController(user: user) { [weak self] in
+            self?.reload()
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
 }
