@@ -64,6 +64,16 @@ final class UserManager {
         return UserRole(rawValue: raw) ?? .worker
     }
 
+    // MARK: - Current User
+    var currentUser: AppUser? {
+        load()
+        guard let userId = defaults.string(forKey: Constants.userId),
+              let uuid = UUID(uuidString: userId) else {
+            return nil
+        }
+        return users.first { $0.id == uuid }
+    }
+
     // MARK: - Auth
     func login(email: String, password: String) -> Bool {
         load()

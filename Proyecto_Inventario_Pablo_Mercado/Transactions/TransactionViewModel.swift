@@ -50,10 +50,28 @@ class TransactionViewModel {
         let success = DataManager.shared.addTransaction(transaction)
 
         if success {
+            // 📧 Enviar email SOLO si es una transacción importante
+            sendTransactionEmailIfImportant(transaction: transaction, product: product)
             return .success(())
         } else {
             return .failure(.insufficientStock)
         }
+    }
+    
+    // MARK: - Email para transacciones importantes
+    private func sendTransactionEmailIfImportant(transaction: Transaction, product: Product) {
+        // Obtener el email del usuario actual
+        guard let adminEmail = UserManager.shared.currentUser?.email else {
+            print("⚠️ No hay email del administrador para enviar notificaciones")
+            return
+        }
+        
+        // El servicio decide automáticamente si es importante
+        TransactionEmailService.shared.processTransaction(
+            transaction,
+            product: product,
+            adminEmail: adminEmail
+        )
     }
 }
 
