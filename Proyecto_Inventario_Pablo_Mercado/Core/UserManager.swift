@@ -57,6 +57,16 @@ final class UserManager {
         let raw = defaults.string(forKey: Constants.role) ?? UserRole.worker.rawValue
         return UserRole(rawValue: raw) ?? .worker
     }
+    
+    // MARK: - Current User
+    var currentUser: AppUser? {
+        load()
+        guard let userId = defaults.string(forKey: Constants.userId),
+              let uuid = UUID(uuidString: userId) else {
+            return nil
+        }
+        return users.first { $0.id == uuid }
+    }
 
     // MARK: - Auth
     func login(email: String, password: String) -> Bool {
@@ -111,12 +121,17 @@ final class UserManager {
     func updateUser(id: UUID, name: String, email: String, role: UserRole) -> Result<Void, UserError> {
         load()
         guard let index = users.firstIndex(where: { $0.id == id }) else {
-            return .failure(.userNotFound)
+            return .failure(.unknown("Usuario no encontrado"))
         }
-
-        users[index].name = name
-        users[index].email = email
-        users[index].role = role
+        
+        let oldUser = users[index]
+        users[index] = AppUser(
+            id: oldUser.id,
+            name: name,
+            email: email,
+            password: oldUser.password,
+            role: role
+        )
 
         save()
         return .success(())

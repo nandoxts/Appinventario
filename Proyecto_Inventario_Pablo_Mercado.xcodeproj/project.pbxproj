@@ -47,6 +47,9 @@
 		B5E223C42EF0765600C4880D /* CreateAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C52EF0765700C4880D /* CreateAdminViewController.swift */; };
 		B5E223C62EF0765800C4880D /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C72EF0765900C4880D /* UserListViewController.swift */; };
 		B5E223C82EF0765A00C4880D /* UserFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E223C92EF0765B00C4880D /* UserFormViewController.swift */; };
+		B5F223CA2EF0765C00C4880D /* EmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CB2EF0765D00C4880D /* EmailService.swift */; };
+		B5F223CC2EF0765E00C4880D /* EmailTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CD2EF0765F00C4880D /* EmailTemplates.swift */; };
+		B5F223CE2EF0766000C4880D /* TransactionEmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CF2EF0766100C4880D /* TransactionEmailService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +95,9 @@
 		B5E223C52EF0765700C4880D /* CreateAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAdminViewController.swift; sourceTree = "<group>"; };
 		B5E223C72EF0765900C4880D /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		B5E223C92EF0765B00C4880D /* UserFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFormViewController.swift; sourceTree = "<group>"; };
+		B5F223CB2EF0765D00C4880D /* EmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailService.swift; sourceTree = "<group>"; };
+		B5F223CD2EF0765F00C4880D /* EmailTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTemplates.swift; sourceTree = "<group>"; };
+		B5F223CF2EF0766100C4880D /* TransactionEmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEmailService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +187,9 @@
 				B5D2237C2EF0606D00C4880D /* Constants.swift */,
 				B5D2237D2EF0606D00C4880D /* DataManager.swift */,
 				B5E223BF2EF0765100C4880D /* UserManager.swift */,
+				B5F223CB2EF0765D00C4880D /* EmailService.swift */,
+				B5F223CD2EF0765F00C4880D /* EmailTemplates.swift */,
+				B5F223CF2EF0766100C4880D /* TransactionEmailService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -357,6 +366,9 @@
 				B5E223C42EF0765600C4880D /* CreateAdminViewController.swift in Sources */,
 				B5E223C62EF0765800C4880D /* UserListViewController.swift in Sources */,
 				B5E223C82EF0765A00C4880D /* UserFormViewController.swift in Sources */,
+				B5F223CA2EF0765C00C4880D /* EmailService.swift in Sources */,
+				B5F223CC2EF0765E00C4880D /* EmailTemplates.swift in Sources */,
+				B5F223CE2EF0766000C4880D /* TransactionEmailService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
