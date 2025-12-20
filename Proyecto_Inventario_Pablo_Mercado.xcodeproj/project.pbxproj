@@ -374,6 +374,9 @@
 				B5E223C42EF0765600C4880D /* CreateAdminViewController.swift in Sources */,
 				B5E223C62EF0765800C4880D /* UserListViewController.swift in Sources */,
 				B5E223C82EF0765A00C4880D /* UserFormViewController.swift in Sources */,
+				B5F223CD2EF0766300C4880D /* EmailService.swift in Sources */,
+				B5F223CE2EF0766400C4880D /* TransactionEmailService.swift in Sources */,
+				B5F223CF2EF0766500C4880D /* EmailTemplates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
