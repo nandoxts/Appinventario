@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B59B21502EF62E64006F4DD4 /* TransactionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59B214F2EF62E64006F4DD4 /* TransactionAPI.swift */; };
 		B5D223622EF05FCE00C4880D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223612EF05FCE00C4880D /* AppDelegate.swift */; };
 		B5D223642EF05FCE00C4880D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223632EF05FCE00C4880D /* SceneDelegate.swift */; };
-		B5D223662EF05FCE00C4880D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223652EF05FCE00C4880D /* ViewController.swift */; };
 		B5D223692EF05FCE00C4880D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D223672EF05FCE00C4880D /* Main.storyboard */; };
 		B5D2236B2EF05FD100C4880D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D2236A2EF05FD100C4880D /* Assets.xcassets */; };
 		B5D2236E2EF05FD100C4880D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5D2236C2EF05FD100C4880D /* LaunchScreen.storyboard */; };
@@ -21,7 +19,6 @@
 		B5D223882EF0608C00C4880D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223862EF0608C00C4880D /* LoginViewController.swift */; };
 		B5D223892EF0608C00C4880D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223872EF0608C00C4880D /* LoginViewModel.swift */; };
 		B5D2238D2EF0609B00C4880D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2238A2EF0609B00C4880D /* Product.swift */; };
-		B5D2238E2EF0609B00C4880D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2238B2EF0609B00C4880D /* User.swift */; };
 		B5D2238F2EF0609B00C4880D /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D2238C2EF0609B00C4880D /* Transaction.swift */; };
 		B5D223932EF060A600C4880D /* ProductFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223902EF060A600C4880D /* ProductFormViewController.swift */; };
 		B5D223942EF060A600C4880D /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223912EF060A600C4880D /* ProductListViewController.swift */; };
@@ -53,11 +50,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B59B214F2EF62E64006F4DD4 /* TransactionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAPI.swift; sourceTree = "<group>"; };
 		B5D2235E2EF05FCE00C4880D /* Proyecto_Inventario_Pablo_Mercado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proyecto_Inventario_Pablo_Mercado.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D223612EF05FCE00C4880D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5D223632EF05FCE00C4880D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B5D223652EF05FCE00C4880D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5D223682EF05FCE00C4880D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5D2236A2EF05FD100C4880D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5D2236D2EF05FD100C4880D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -69,7 +64,6 @@
 		B5D223862EF0608C00C4880D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B5D223872EF0608C00C4880D /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B5D2238A2EF0609B00C4880D /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		B5D2238B2EF0609B00C4880D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B5D2238C2EF0609B00C4880D /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		B5D223902EF060A600C4880D /* ProductFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductFormViewController.swift; sourceTree = "<group>"; };
 		B5D223912EF060A600C4880D /* ProductListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +136,6 @@
 				B5D223752EF0600700C4880D /* Home */,
 				B5D223612EF05FCE00C4880D /* AppDelegate.swift */,
 				B5D223632EF05FCE00C4880D /* SceneDelegate.swift */,
-				B5D223652EF05FCE00C4880D /* ViewController.swift */,
 				B5D223672EF05FCE00C4880D /* Main.storyboard */,
 				B5D2236A2EF05FD100C4880D /* Assets.xcassets */,
 				B5D2236C2EF05FD100C4880D /* LaunchScreen.storyboard */,
@@ -175,7 +168,6 @@
 			children = (
 				B5D2238A2EF0609B00C4880D /* Product.swift */,
 				B5D2238C2EF0609B00C4880D /* Transaction.swift */,
-				B5D2238B2EF0609B00C4880D /* User.swift */,
 				B5D223BC2EF0764F00C4880D /* ProductCategory.swift */,
 				B5E223C12EF0765300C4880D /* AppUser.swift */,
 				B5E223C32EF0765500C4880D /* UserRole.swift */,
@@ -211,7 +203,6 @@
 				B5D223982EF060AF00C4880D /* TransactionListViewController.swift */,
 				B5D223962EF060AF00C4880D /* TransactionViewModel.swift */,
 				B5D223B62EF06A8600C4880D /* TransactionTableView.swift */,
-				B59B214F2EF62E64006F4DD4 /* TransactionAPI.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -334,7 +325,6 @@
 				B5D223A42EF0648700C4880D /* BaseCardCell.swift in Sources */,
 				B5D223BD2EF0764F00C4880D /* ProductCategory.swift in Sources */,
 				B5D223882EF0608C00C4880D /* LoginViewController.swift in Sources */,
-				B5D223662EF05FCE00C4880D /* ViewController.swift in Sources */,
 				B5D223A02EF062F400C4880D /* UITextField.swift in Sources */,
 				B5D223812EF0606D00C4880D /* Extensions.swift in Sources */,
 				B5D2239B2EF060AF00C4880D /* TransactionListViewController.swift in Sources */,
@@ -352,7 +342,6 @@
 				B5D223942EF060A600C4880D /* ProductListViewController.swift in Sources */,
 				B5D223932EF060A600C4880D /* ProductFormViewController.swift in Sources */,
 				B5D223622EF05FCE00C4880D /* AppDelegate.swift in Sources */,
-				B5D2238E2EF0609B00C4880D /* User.swift in Sources */,
 				B5D223992EF060AF00C4880D /* TransactionViewModel.swift in Sources */,
 				B5D223A22EF063C600C4880D /* DashboardButton.swift in Sources */,
 				B5D223A82EF064FB00C4880D /* TransactionCell.swift in Sources */,
@@ -368,7 +357,6 @@
 				B5E223C42EF0765600C4880D /* CreateAdminViewController.swift in Sources */,
 				B5E223C62EF0765800C4880D /* UserListViewController.swift in Sources */,
 				B5E223C82EF0765A00C4880D /* UserFormViewController.swift in Sources */,
-				B59B21502EF62E64006F4DD4 /* TransactionAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
