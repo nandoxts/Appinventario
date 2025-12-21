@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         setupGradientBackground()
         setupUI()
 
-        // ⚠️ Si no hay usuarios, redirigir a crear admin
+        // Si no hay usuarios, redirigir a crear admin
         if !viewModel.hasUsers() {
             goToCreateAdmin()
         }

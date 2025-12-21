@@ -94,7 +94,7 @@ class TransactionFormViewController: UIViewController {
             // Mostrar alerta de éxito con opción de saber si se envió email
             let product = viewModel.products[selectedIndex]
             
-            var messageText = "✅ Transacción registrada correctamente"
+            var messageText = "Transacción registrada correctamente"
             
             // Determinar si se envió email
             let wasEmailSent = shouldSendEmail(for: quantity, type: type, productStock: product.stock)

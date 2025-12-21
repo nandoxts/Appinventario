@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
-        // 🚀 Arranque centralizado de la app
+        // Arranque centralizado de la app
         setRoot(.splash)
     }
 
