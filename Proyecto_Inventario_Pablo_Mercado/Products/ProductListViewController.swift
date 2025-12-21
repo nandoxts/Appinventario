@@ -1,6 +1,6 @@
 import UIKit
 
-class ProductListViewController: UIViewController, UISearchBarDelegate {
+class ProductListViewController: UIViewController, UISearchBarDelegate, ProductTableViewDelegate {
 
     private let viewModel = ProductViewModel()
     private var productTable: ProductTableView!
@@ -46,6 +46,7 @@ class ProductListViewController: UIViewController, UISearchBarDelegate {
     private func setupTable() {
         filteredProducts = viewModel.products
         productTable = ProductTableView(products: filteredProducts)
+        productTable.productDelegate = self // Configurar delegate
         view.addSubview(productTable)
         productTable.translatesAutoresizingMaskIntoConstraints = false
 
@@ -87,10 +88,81 @@ class ProductListViewController: UIViewController, UISearchBarDelegate {
     @objc private func addProduct() {
         if !requireAdmin() { return }
         
-        let form = ProductFormViewController {
-            // No necesitamos actualizar la tabla aquí
+        let form = ProductFormViewController { [weak self] in
+            self?.reload()
         }
         navigationController?.pushViewController(form, animated: true)
+    }
+    
+    private func reload() {
+        filteredProducts = viewModel.products
+        productTable.update(products: filteredProducts)
+        updateEmptyState()
+    }
+
+    // MARK: - ProductTableViewDelegate
+    
+    func productTableView(_ tableView: ProductTableView, didSelectProduct product: Product) {
+        // Mostrar menú de opciones
+        let sheet = UIAlertController(
+            title: product.name,
+            message: "Precio: $\(product.price) | Stock: \(product.stock)",
+            preferredStyle: .actionSheet
+        )
+        
+        if isAdmin() {
+            sheet.addAction(UIAlertAction(title: "Editar", style: .default) { [weak self] _ in
+                self?.editProduct(product)
+            })
+            
+            sheet.addAction(UIAlertAction(title: "Eliminar", style: .destructive) { [weak self] _ in
+                self?.confirmDelete(product)
+            })
+        }
+        
+        sheet.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        
+        present(sheet, animated: true)
+    }
+    
+    private func editProduct(_ product: Product) {
+        if !requireAdmin() { return }
+        
+        let form = ProductFormViewController(product: product) { [weak self] in
+            self?.reload()
+        }
+        navigationController?.pushViewController(form, animated: true)
+    }
+    
+    private func confirmDelete(_ product: Product) {
+        let alert = UIAlertController(
+            title: "Eliminar producto",
+            message: "¿Seguro que deseas eliminar \(product.name)?",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Eliminar", style: .destructive) { [weak self] _ in
+            self?.deleteProduct(product)
+        })
+        
+        present(alert, animated: true)
+    }
+    
+    private func deleteProduct(_ product: Product) {
+        viewModel.deleteProduct(id: product.id) { [weak self] success in
+            if success {
+                self?.reload()
+            } else {
+                self?.showError("No se pudo eliminar el producto")
+            }
+        }
+    }
+    
+    private func showError(_ message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 
     // MARK: - UISearchBarDelegate

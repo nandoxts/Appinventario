@@ -4,6 +4,7 @@ class ProductFormViewController: UIViewController {
 
     private let viewModel = ProductViewModel()
     private let completion: () -> Void
+    private let product: Product? // Producto a editar (nil si es nuevo)
 
     private let nameTF = UITextField()
     private let priceTF = UITextField()
@@ -11,7 +12,9 @@ class ProductFormViewController: UIViewController {
     private let categoryPicker = UIPickerView()
     private var selectedCategory: ProductCategory = .other
 
-    init(completion: @escaping () -> Void) {
+    // Inicializador modificado para soportar edición
+    init(product: Product? = nil, completion: @escaping () -> Void) {
+        self.product = product
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
     }
@@ -20,9 +23,10 @@ class ProductFormViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Nuevo Producto"
+        title = product == nil ? "Nuevo Producto" : "Editar Producto"
         view.backgroundColor = .systemBackground
         setupUI()
+        loadProductData()
     }
 
     private func setupUI() {
@@ -65,20 +69,58 @@ class ProductFormViewController: UIViewController {
         ])
     }
 
-    @objc private func saveTapped() {
-        let result = viewModel.addProduct(
-            name: nameTF.text ?? "",
-            priceText: priceTF.text ?? "",
-            stockText: stockTF.text ?? "",
-            category: selectedCategory
-        )
+    private func loadProductData() {
+        guard let product = product else { return }
+        
+        // Llenar campos con datos existentes
+        nameTF.text = product.name
+        priceTF.text = String(product.price)
+        stockTF.text = String(product.stock)
+        selectedCategory = product.category
+        
+        // Seleccionar categoría en picker
+        if let index = ProductCategory.allCases.firstIndex(of: product.category) {
+            categoryPicker.selectRow(index, inComponent: 0, animated: false)
+        }
+    }
 
-        switch result {
-        case .success:
+    @objc private func saveTapped() {
+        // Modo edición
+        if let existingProduct = product {
+            guard let price = Double(priceTF.text ?? ""),
+                  let stock = Int(stockTF.text ?? "") else {
+                presentAlert(message: "Precio o stock inválido")
+                return
+            }
+            
+            let updatedProduct = Product(
+                id: existingProduct.id,
+                name: nameTF.text ?? "",
+                price: price,
+                stock: stock,
+                category: selectedCategory
+            )
+            
+            viewModel.updateProduct(updatedProduct)
             completion()
             navigationController?.popViewController(animated: true)
-        case .failure(let error):
-            presentAlert(message: error.localizedDescription)
+            
+        } else {
+            // Modo creación
+            let result = viewModel.addProduct(
+                name: nameTF.text ?? "",
+                priceText: priceTF.text ?? "",
+                stockText: stockTF.text ?? "",
+                category: selectedCategory
+            )
+
+            switch result {
+            case .success:
+                completion()
+                navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                presentAlert(message: error.localizedDescription)
+            }
         }
     }
 
