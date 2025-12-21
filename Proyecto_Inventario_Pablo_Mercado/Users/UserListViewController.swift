@@ -6,7 +6,7 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     private var filteredUsers: [AppUser] = []
     private let tableView = UITableView()
     private let searchBar = UISearchBar()
-    private let emptyLabel = UILabel()
+    private let emptyStateView = UIStackView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +46,12 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         // Configurar tabla
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UserCell")
+        tableView.register(UserCell.self, forCellReuseIdentifier: "UserCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 80
 
         view.addSubview(tableView)
 
@@ -61,21 +64,43 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     private func setupEmptyState() {
-        emptyLabel.text = "No hay usuarios"
-        emptyLabel.textAlignment = .center
-        emptyLabel.textColor = .systemGray
-        emptyLabel.font = .systemFont(ofSize: 16)
-        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(emptyLabel)
+        let iconView = UIImageView()
+        iconView.image = UIImage(systemName: "person.2")
+        iconView.tintColor = .systemGray3
+        iconView.contentMode = .scaleAspectFit
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "No hay usuarios"
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .systemGray
+        titleLabel.font = .boldSystemFont(ofSize: 18)
+        
+        let subtitleLabel = UILabel()
+        subtitleLabel.text = "Presiona + para agregar el primero"
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.textColor = .systemGray2
+        subtitleLabel.font = .systemFont(ofSize: 14)
+        
+        emptyStateView.axis = .vertical
+        emptyStateView.spacing = 12
+        emptyStateView.alignment = .center
+        emptyStateView.addArrangedSubview(iconView)
+        emptyStateView.addArrangedSubview(titleLabel)
+        emptyStateView.addArrangedSubview(subtitleLabel)
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emptyStateView)
 
         NSLayoutConstraint.activate([
-            emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            iconView.widthAnchor.constraint(equalToConstant: 80),
+            iconView.heightAnchor.constraint(equalToConstant: 80),
+            emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyStateView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
     private func updateEmptyState() {
-        emptyLabel.isHidden = !filteredUsers.isEmpty
+        emptyStateView.isHidden = !filteredUsers.isEmpty
         tableView.isHidden = filteredUsers.isEmpty
     }
 
@@ -100,16 +125,14 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let user = filteredUsers[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
-        cell.textLabel?.text = user.name
-        cell.detailTextLabel?.text = user.email
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
+        cell.configure(user: filteredUsers[indexPath.row])
         return cell
     }
 
     // Opcional: para mejorar apariencia
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -149,6 +172,15 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         tableView.reloadData()
         updateEmptyState()
+        updateSearchPlaceholder()
+    }
+    
+    private func updateSearchPlaceholder() {
+        if searchBar.text?.isEmpty ?? true {
+            searchBar.placeholder = "Buscar usuario..."
+        } else {
+            searchBar.placeholder = "\(filteredUsers.count) de \(users.count) usuarios"
+        }
     }
     
     private func confirmDelete(_ user: AppUser) {

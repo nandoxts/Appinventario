@@ -50,7 +50,7 @@ class TransactionViewModel {
         let success = DataManager.shared.addTransaction(transaction)
 
         if success {
-            // 📧 Enviar email SOLO si es una transacción importante
+            // Enviar email SOLO si es una transacción importante
             sendTransactionEmailIfImportant(transaction: transaction, product: product)
             return .success(())
         } else {

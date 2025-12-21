@@ -6,9 +6,9 @@ class ProductFormViewController: UIViewController {
     private let completion: () -> Void
     private let product: Product? // Producto a editar (nil si es nuevo)
 
-    private let nameTF = UITextField()
-    private let priceTF = UITextField()
-    private let stockTF = UITextField()
+    private let nameTF = UITextField.form(placeholder: "Nombre del producto")
+    private let priceTF = UITextField.form(placeholder: "Precio", keyboard: .decimalPad)
+    private let stockTF = UITextField.form(placeholder: "Stock inicial", keyboard: .numberPad)
     private let categoryPicker = UIPickerView()
     private var selectedCategory: ProductCategory = .other
 
@@ -30,29 +30,30 @@ class ProductFormViewController: UIViewController {
     }
 
     private func setupUI() {
-        nameTF.placeholder = "Nombre"
-        nameTF.borderStyle = .roundedRect
-
-        priceTF.placeholder = "Precio"
-        priceTF.borderStyle = .roundedRect
-        priceTF.keyboardType = .decimalPad
-
-        stockTF.placeholder = "Stock"
-        stockTF.borderStyle = .roundedRect
-        stockTF.keyboardType = .numberPad
+        nameTF.returnKeyType = .next
+        priceTF.returnKeyType = .next
+        stockTF.returnKeyType = .done
 
         categoryPicker.dataSource = self
         categoryPicker.delegate = self
 
-        let saveButton = UIButton(type: .system)
-        saveButton.setTitle("Guardar", for: .normal)
+        let categoryLabel = UILabel()
+        categoryLabel.text = "Categoría"
+        categoryLabel.font = .boldSystemFont(ofSize: 15)
+        categoryLabel.textColor = .label
+
+        let categoryStack = UIStackView(arrangedSubviews: [categoryLabel, categoryPicker])
+        categoryStack.axis = .vertical
+        categoryStack.spacing = 8
+
+        let saveButton = UIButton.primary(title: "Guardar")
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
 
         let stack = UIStackView(arrangedSubviews: [
             nameTF,
             priceTF,
             stockTF,
-            categoryPicker,
+            categoryStack,
             saveButton
         ])
         stack.axis = .vertical

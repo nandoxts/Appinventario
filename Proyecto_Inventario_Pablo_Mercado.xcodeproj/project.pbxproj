@@ -50,6 +50,7 @@
 		B5F223CA2EF0765C00C4880D /* EmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CB2EF0765D00C4880D /* EmailService.swift */; };
 		B5F223CC2EF0765E00C4880D /* EmailTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CD2EF0765F00C4880D /* EmailTemplates.swift */; };
 		B5F223CE2EF0766000C4880D /* TransactionEmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CF2EF0766100C4880D /* TransactionEmailService.swift */; };
+		B5D223D02EF0766200C4880D /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223D12EF0766300C4880D /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		B5F223CB2EF0765D00C4880D /* EmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailService.swift; sourceTree = "<group>"; };
 		B5F223CD2EF0765F00C4880D /* EmailTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTemplates.swift; sourceTree = "<group>"; };
 		B5F223CF2EF0766100C4880D /* TransactionEmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEmailService.swift; sourceTree = "<group>"; };
+		B5D223D12EF0766300C4880D /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 				B5D223A32EF0648700C4880D /* BaseCardCell.swift */,
 				B5D223A52EF064C900C4880D /* ProductCell.swift */,
 				B5D223A72EF064FB00C4880D /* TransactionCell.swift */,
+				B5D223D12EF0766300C4880D /* UserCell.swift */,
 				B5D2237E2EF0606D00C4880D /* Extensions.swift */,
 			);
 			path = Extension;
@@ -369,6 +372,7 @@
 				B5F223CA2EF0765C00C4880D /* EmailService.swift in Sources */,
 				B5F223CC2EF0765E00C4880D /* EmailTemplates.swift in Sources */,
 				B5F223CE2EF0766000C4880D /* TransactionEmailService.swift in Sources */,
+				B5D223D02EF0766200C4880D /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

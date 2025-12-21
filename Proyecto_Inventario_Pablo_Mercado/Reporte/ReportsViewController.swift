@@ -13,6 +13,15 @@ class ReportsViewController: UIViewController {
     }
 
     private func setupUI() {
+        // ScrollView para contenido scrollable
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(contentView)
+
         let totalProductsCard = ReportCardView(
             title: "Productos",
             icon: "cube.box.fill",
@@ -48,24 +57,56 @@ class ReportsViewController: UIViewController {
         stack.spacing = 16
         stack.translatesAutoresizingMaskIntoConstraints = false
 
-        view.addSubview(stack)
+        contentView.addSubview(stack)
 
+        // Agregar título de stock bajo si hay
+        var stackElements: [UIView] = [stack]
+        
+        if !viewModel.lowStockProducts.isEmpty {
+            let lowStockTitle = UILabel()
+            lowStockTitle.text = "Productos con Stock Bajo"
+            lowStockTitle.font = .boldSystemFont(ofSize: 18)
+            lowStockTitle.textColor = .label
+            lowStockTitle.translatesAutoresizingMaskIntoConstraints = false
+
+            lowStockTable = LowStockTableView(products: viewModel.lowStockProducts)
+            lowStockTable?.translatesAutoresizingMaskIntoConstraints = false
+
+            let lowStockStack = UIStackView(arrangedSubviews: [lowStockTitle, lowStockTable!])
+            lowStockStack.axis = .vertical
+            lowStockStack.spacing = 12
+            lowStockStack.translatesAutoresizingMaskIntoConstraints = false
+            
+            stackElements.append(lowStockStack)
+        }
+
+        let mainStack = UIStackView(arrangedSubviews: stackElements)
+        mainStack.axis = .vertical
+        mainStack.spacing = 24
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(mainStack)
+
+        // ScrollView constraints
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+
+            mainStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
+            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
         ])
 
-        if !viewModel.lowStockProducts.isEmpty {
-            lowStockTable = LowStockTableView(products: viewModel.lowStockProducts)
-            view.addSubview(lowStockTable!)
-
-            NSLayoutConstraint.activate([
-                lowStockTable!.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 24),
-                lowStockTable!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                lowStockTable!.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                lowStockTable!.heightAnchor.constraint(equalToConstant: CGFloat(viewModel.lowStockProducts.count * 44))
-            ])
+        if let lowStockTable = lowStockTable {
+            lowStockTable.heightAnchor.constraint(equalToConstant: CGFloat(viewModel.lowStockProducts.count * 44)).isActive = true
         }
     }
 }

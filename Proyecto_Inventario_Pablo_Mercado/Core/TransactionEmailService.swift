@@ -59,7 +59,7 @@ class TransactionEmailService {
         let htmlContent = """
         <html>
             <body style="font-family: Arial, sans-serif; color: #333;">
-                <h2 style="color: #FF3B30;">🚨 VENTA GRANDE REGISTRADA</h2>
+                <h2 style="color: #FF3B30;">VENTA GRANDE REGISTRADA</h2>
                 <p>Se ha registrado una salida importante en tu inventario:</p>
                 
                 <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
@@ -94,11 +94,11 @@ class TransactionEmailService {
         
         EmailService.shared.sendEmail(
             to: adminEmail,
-            subject: "🚨 Venta Grande: \(transaction.productName) - \(transaction.quantity) unidades",
+            subject: "Venta Grande: \(transaction.productName) - \(transaction.quantity) unidades",
             htmlContent: htmlContent
         ) { result in
             if case .success = result {
-                print("✅ Alerta de venta grande enviada")
+                print("[Email enviado] Alerta de venta grande enviada")
             }
         }
     }
@@ -111,7 +111,7 @@ class TransactionEmailService {
         let htmlContent = """
         <html>
             <body style="font-family: Arial, sans-serif; color: #333;">
-                <h2 style="color: #FF9500;">⚠️ STOCK CRÍTICO</h2>
+                <h2 style="color: #FF9500;">STOCK CRÍTICO</h2>
                 <p>Un producto ha alcanzado niveles críticos de inventario:</p>
                 
                 <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
@@ -125,7 +125,7 @@ class TransactionEmailService {
                     </tr>
                 </table>
                 
-                <p style="color: #FF3B30; font-weight: bold;">⚠️ Es recomendable realizar un pedido urgente</p>
+                <p style="color: #FF3B30; font-weight: bold;">Es recomendable realizar un pedido urgente</p>
                 
                 <p style="margin-top: 20px; color: #666;">
                     Abre tu aplicación para realizar un nuevo pedido o ver más opciones.
@@ -136,11 +136,11 @@ class TransactionEmailService {
         
         EmailService.shared.sendEmail(
             to: adminEmail,
-            subject: "⚠️ Stock Crítico: \(productName) - Solo \(newStock) unidades",
+            subject: "Stock Crítico: \(productName) - Solo \(newStock) unidades",
             htmlContent: htmlContent
         ) { result in
             if case .success = result {
-                print("✅ Alerta de stock crítico enviada")
+                print("[Email enviado] Alerta de stock crítico enviada")
             }
         }
     }
@@ -153,7 +153,7 @@ class TransactionEmailService {
         let htmlContent = """
         <html>
             <body style="font-family: Arial, sans-serif; color: #333;">
-                <h2 style="color: #34C759;">📦 REABASTECIMIENTO REGISTRADO</h2>
+                <h2 style="color: #34C759;">REABASTECIMIENTO REGISTRADO</h2>
                 <p>Se ha registrado una entrada importante de inventario:</p>
                 
                 <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
@@ -188,11 +188,11 @@ class TransactionEmailService {
         
         EmailService.shared.sendEmail(
             to: adminEmail,
-            subject: "📦 Reabastecimiento: \(transaction.productName) - \(transaction.quantity) unidades",
+            subject: "Reabastecimiento: \(transaction.productName) - \(transaction.quantity) unidades",
             htmlContent: htmlContent
         ) { result in
             if case .success = result {
-                print("✅ Alerta de reabastecimiento enviada")
+                print("[Email enviado] Alerta de reabastecimiento enviada")
             }
         }
     }
