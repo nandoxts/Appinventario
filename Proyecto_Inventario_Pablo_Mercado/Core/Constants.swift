@@ -14,8 +14,8 @@ struct Constants {
     static let role = "userRole"
     static let usersStore = "usersStore"
     
-    // SendGrid API //otra api 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
-    static let sendGridApiKey = "SG.2oNZoKtcR5K2i7S01zuQ_S2_4Zw41cxhvhvx3Er1I003e1uGUAU3Yz2IFIags"
+    // SendGrid API - AGREGAR TU CLAVE AQUI desde https://app.sendgrid.com/settings/api_keys
+    static let sendGridApiKey = "YOUR_SENDGRID_API_KEY_HERE"
     static let sendGridFromEmail = "inventario@tuempresa.com"
     static let sendGridFromName = "Sistema de Inventario"
 }
