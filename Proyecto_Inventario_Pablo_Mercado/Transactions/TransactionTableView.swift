@@ -1,13 +1,19 @@
 import UIKit
 
-class TransactionTableView: UITableView, UITableViewDataSource {
+protocol TransactionTableViewDelegate: AnyObject {
+    func transactionTableView(_ tableView: TransactionTableView, didSelectTransaction transaction: Transaction)
+}
+
+class TransactionTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
 
     private var transactions: [Transaction] = []
+    weak var transactionDelegate: TransactionTableViewDelegate?
 
     init(transactions: [Transaction]) {
         super.init(frame: .zero, style: .plain)
         self.transactions = transactions
         dataSource = self
+        delegate = self
         register(TransactionCell.self, forCellReuseIdentifier: "TransactionCell")
         separatorStyle = .none
         backgroundColor = .clear
@@ -30,5 +36,10 @@ class TransactionTableView: UITableView, UITableViewDataSource {
     func update(transactions: [Transaction]) {
         self.transactions = transactions
         reloadData()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let transaction = transactions[indexPath.row]
+        transactionDelegate?.transactionTableView(self, didSelectTransaction: transaction)
     }
 }

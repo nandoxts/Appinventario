@@ -5,7 +5,7 @@ class ProductListViewController: UIViewController, UISearchBarDelegate, ProductT
     private let viewModel = ProductViewModel()
     private var productTable: ProductTableView!
     private let searchBar = UISearchBar()
-    private let emptyLabel = UILabel()
+    private let emptyStateView = UIStackView()
     private var filteredProducts: [Product] = []
 
     override func viewDidLoad() {
@@ -28,6 +28,7 @@ class ProductListViewController: UIViewController, UISearchBarDelegate, ProductT
         filteredProducts = viewModel.products
         productTable.update(products: filteredProducts)
         updateEmptyState()
+        updateSearchPlaceholder()
     }
 
     private func setupSearchBar() {
@@ -59,22 +60,55 @@ class ProductListViewController: UIViewController, UISearchBarDelegate, ProductT
     }
 
     private func setupEmptyState() {
-        emptyLabel.text = "No hay productos"
-        emptyLabel.textAlignment = .center
-        emptyLabel.textColor = .systemGray
-        emptyLabel.font = .systemFont(ofSize: 16)
-        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(emptyLabel)
+        let iconView = UIImageView()
+        iconView.image = UIImage(systemName: "cube.box")
+        iconView.tintColor = .systemGray3
+        iconView.contentMode = .scaleAspectFit
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "No hay productos"
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = .systemGray
+        titleLabel.font = .boldSystemFont(ofSize: 18)
+        
+        let subtitleLabel = UILabel()
+        subtitleLabel.text = isAdmin() ? "Presiona + para agregar el primero" : "A\u00fan no hay productos registrados"
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.textColor = .systemGray2
+        subtitleLabel.font = .systemFont(ofSize: 14)
+        
+        emptyStateView.axis = .vertical
+        emptyStateView.spacing = 12
+        emptyStateView.alignment = .center
+        emptyStateView.addArrangedSubview(iconView)
+        emptyStateView.addArrangedSubview(titleLabel)
+        emptyStateView.addArrangedSubview(subtitleLabel)
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emptyStateView)
 
         NSLayoutConstraint.activate([
-            emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            iconView.widthAnchor.constraint(equalToConstant: 80),
+            iconView.heightAnchor.constraint(equalToConstant: 80),
+            emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyStateView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
     private func updateEmptyState() {
-        emptyLabel.isHidden = !filteredProducts.isEmpty
+        emptyStateView.isHidden = !filteredProducts.isEmpty
         productTable.isHidden = filteredProducts.isEmpty
+    }
+
+    private func updateSearchPlaceholder() {
+        let total = viewModel.products.count
+        let showing = filteredProducts.count
+        
+        if searchBar.text?.isEmpty ?? true {
+            searchBar.placeholder = "Buscar producto..."
+        } else {
+            searchBar.placeholder = "\(showing) de \(total) productos"
+        }
     }
 
     private func setupAddButton() {
@@ -98,6 +132,22 @@ class ProductListViewController: UIViewController, UISearchBarDelegate, ProductT
         filteredProducts = viewModel.products
         productTable.update(products: filteredProducts)
         updateEmptyState()
+        updateSearchPlaceholder()
+    }
+
+    // MARK: - UISearchBarDelegate
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredProducts = viewModel.products
+        } else {
+            filteredProducts = viewModel.products.filter { product in
+                product.name.lowercased().contains(searchText.lowercased())
+            }
+        }
+        productTable.update(products: filteredProducts)
+        updateEmptyState()
+        updateSearchPlaceholder()
     }
 
     // MARK: - ProductTableViewDelegate

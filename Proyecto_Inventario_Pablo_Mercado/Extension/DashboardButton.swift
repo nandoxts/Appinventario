@@ -26,6 +26,16 @@ final class DashboardButton: UIControl {
     ) {
         backgroundColor = color
         layer.cornerRadius = 18
+        
+        // Sombra para profundidad
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.15
+        layer.shadowRadius = 10
+        layer.shadowOffset = CGSize(width: 0, height: 4)
+        
+        // Animación de tap
+        addTarget(self, action: #selector(touchDown), for: .touchDown)
+        addTarget(self, action: #selector(touchUp), for: [.touchUpInside, .touchUpOutside, .touchCancel])
 
         iconView.image = UIImage(systemName: icon)
         iconView.tintColor = .white
@@ -62,5 +72,19 @@ final class DashboardButton: UIControl {
 
             heightAnchor.constraint(equalToConstant: 90)
         ])
+    }
+    
+    @objc private func touchDown() {
+        UIView.animate(withDuration: 0.1) {
+            self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            self.layer.shadowOpacity = 0.05
+        }
+    }
+    
+    @objc private func touchUp() {
+        UIView.animate(withDuration: 0.1) {
+            self.transform = .identity
+            self.layer.shadowOpacity = 0.15
+        }
     }
 }
