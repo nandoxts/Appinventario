@@ -107,7 +107,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func logoutTapped() {
-        UserManager.shared.logout()
+        AppDependencies.shared.authUseCases.logout()
         let loginVC = LoginViewController()
         let navController = UINavigationController(rootViewController: loginVC)
 

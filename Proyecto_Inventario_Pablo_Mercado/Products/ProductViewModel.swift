@@ -1,43 +1,23 @@
 import Foundation
 
-enum ProductError: Error {
-    case invalidName
-    case invalidPrice
-    case invalidStock
+final class ProductViewModel {
+    private let useCases: ProductUseCases
 
-    var localizedDescription: String {
-        switch self {
-        case .invalidName: return "Nombre inválido"
-        case .invalidPrice: return "Precio inválido"
-        case .invalidStock: return "Stock inválido"
-        }
-    }
-}
+    var products: [Product] { useCases.products }
 
-class ProductViewModel {
-
-    var products: [Product] {
-        DataManager.shared.products
+    init(useCases: ProductUseCases = AppDependencies.shared.productUseCases) {
+        self.useCases = useCases
     }
 
     func addProduct(name: String, priceText: String, stockText: String, category: ProductCategory) -> Result<Void, ProductError> {
-        guard !name.isEmpty else { return .failure(.invalidName) }
-        guard let price = Double(priceText), price >= 0 else { return .failure(.invalidPrice) }
-        guard let stock = Int(stockText), stock >= 0 else { return .failure(.invalidStock) }
-
-        let product = Product(id: 0, name: name, price: price, stock: stock, category: category)
-        DataManager.shared.addProduct(product)
-        return .success(())
+        useCases.add(name: name, priceText: priceText, stockText: stockText, category: category)
     }
 
     func updateProduct(_ product: Product) {
-        DataManager.shared.updateProduct(product)
+        useCases.update(product)
     }
 
     func deleteProduct(id: Int, completion: @escaping (Bool) -> Void) {
-        DataManager.shared.deleteProduct(id: id) { success in
-            completion(success)
-        }
+        useCases.delete(id: id, completion: completion)
     }
-
 }

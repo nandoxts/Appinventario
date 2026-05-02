@@ -1,31 +1,17 @@
-import UIKit
+import Foundation
 
 final class ReportsViewModel {
+    private let reportUseCases: ReportUseCases
 
-    private let products = DataManager.shared.products
-    private let transactions = DataManager.shared.transactions
-
-    var totalProducts: Int {
-        products.count
+    init(reportUseCases: ReportUseCases = AppDependencies.shared.reportUseCases) {
+        self.reportUseCases = reportUseCases
     }
 
-    var totalStock: Int {
-        products.reduce(0) { $0 + $1.stock }
-    }
+    private var summary: ReportSummary { reportUseCases.summary() }
 
-    var lowStockProducts: [Product] {
-        products.filter { $0.stock < 5 }
-    }
-
-    var totalEntries: Int {
-        transactions
-            .filter { $0.type == .entrada }
-            .reduce(0) { $0 + $1.quantity }
-    }
-
-    var totalExits: Int {
-        transactions
-            .filter { $0.type == .salida }
-            .reduce(0) { $0 + $1.quantity }
-    }
+    var totalProducts: Int { summary.totalProducts }
+    var totalStock: Int { summary.totalStock }
+    var lowStockProducts: [Product] { summary.lowStockProducts }
+    var totalEntries: Int { summary.totalEntries }
+    var totalExits: Int { summary.totalExits }
 }

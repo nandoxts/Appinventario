@@ -215,16 +215,4 @@ class ProductListViewController: UIViewController, UISearchBarDelegate, ProductT
         present(alert, animated: true)
     }
 
-    // MARK: - UISearchBarDelegate
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            filteredProducts = viewModel.products
-        } else {
-            filteredProducts = viewModel.products.filter { product in
-                product.name.lowercased().contains(searchText.lowercased())
-            }
-        }
-        productTable.update(products: filteredProducts)
-        updateEmptyState()
-    }
 }

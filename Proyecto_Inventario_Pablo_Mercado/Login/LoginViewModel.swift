@@ -1,16 +1,21 @@
 import Foundation
 
-class LoginViewModel {
+final class LoginViewModel {
+    private let authUseCases: AuthUseCases
+
+    init(authUseCases: AuthUseCases = AppDependencies.shared.authUseCases) {
+        self.authUseCases = authUseCases
+    }
 
     func login(email: String, password: String) -> Bool {
-        return UserManager.shared.login(email: email, password: password)
+        authUseCases.login(email: email, password: password)
     }
-    
+
     func logout() {
-        UserManager.shared.logout()
+        authUseCases.logout()
     }
-    
+
     func hasUsers() -> Bool {
-        return UserManager.shared.hasUsers()
+        authUseCases.hasUsers()
     }
 }

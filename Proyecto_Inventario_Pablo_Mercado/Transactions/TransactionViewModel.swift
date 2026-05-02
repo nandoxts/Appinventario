@@ -1,76 +1,35 @@
 import Foundation
 
-enum TransactionError: Error {
-    case invalidQuantity
-    case insufficientStock
-    case noProducts
+final class TransactionViewModel {
+    private let transactionUseCases: TransactionUseCases
+    private let authUseCases: AuthUseCases
 
-    var localizedDescription: String {
-        switch self {
-        case .invalidQuantity: return "Cantidad inválida"
-        case .insufficientStock: return "No hay suficiente stock"
-        case .noProducts: return "No hay productos disponibles"
-        }
-    }
-}
+    var products: [Product] { transactionUseCases.products }
+    var transactions: [Transaction] { transactionUseCases.transactions }
 
-class TransactionViewModel {
-
-    // Acceder a productos
-    var products: [Product] {
-        DataManager.shared.products
+    init(
+        transactionUseCases: TransactionUseCases = AppDependencies.shared.transactionUseCases,
+        authUseCases: AuthUseCases = AppDependencies.shared.authUseCases
+    ) {
+        self.transactionUseCases = transactionUseCases
+        self.authUseCases = authUseCases
     }
 
-    // Acceder a transacciones
-    var transactions: [Transaction] {
-        DataManager.shared.transactions
+    func deleteTransaction(_ transaction: Transaction, completion: @escaping (Bool) -> Void) {
+        let success = transactionUseCases.delete(id: transaction.id)
+        DispatchQueue.main.async { completion(success) }
     }
 
     func createTransaction(productIndex: Int, quantity: Int, type: TransactionType) -> Result<Void, TransactionError> {
-
-        guard products.indices.contains(productIndex) else {
-            return .failure(.noProducts)
-        }
-
-        let product = products[productIndex]
-
-        guard quantity > 0 else {
-            return .failure(.invalidQuantity)
-        }
-
-        let transaction = Transaction(
-            id: UUID().uuidString,
-            productId: product.id,
-            productName: product.name,
-            quantity: quantity,
-            type: type,
-            date: Date()
-        )
-
-        let success = DataManager.shared.addTransaction(transaction)
-
-        if success {
-            // Enviar email SOLO si es una transacción importante
-            sendTransactionEmailIfImportant(transaction: transaction, product: product)
+        let result = transactionUseCases.create(productIndex: productIndex, quantity: quantity, type: type)
+        switch result {
+        case .success(let payload):
+            if let adminEmail = authUseCases.currentUser()?.email {
+                TransactionEmailService.shared.processTransaction(payload.transaction, product: payload.product, adminEmail: adminEmail)
+            }
             return .success(())
-        } else {
-            return .failure(.insufficientStock)
+        case .failure(let error):
+            return .failure(error)
         }
-    }
-    
-    // MARK: - Email para transacciones importantes
-    private func sendTransactionEmailIfImportant(transaction: Transaction, product: Product) {
-        // Obtener el email del usuario actual
-        guard let adminEmail = UserManager.shared.currentUser?.email else {
-            print("⚠️ No hay email del administrador para enviar notificaciones")
-            return
-        }
-        
-        // El servicio decide automáticamente si es importante
-        TransactionEmailService.shared.processTransaction(
-            transaction,
-            product: product,
-            adminEmail: adminEmail
-        )
     }
 }

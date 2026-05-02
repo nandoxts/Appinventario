@@ -2,6 +2,7 @@ import UIKit
 
 class UserListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
+    private let viewModel = UserViewModel()
     private var users: [AppUser] = []
     private var filteredUsers: [AppUser] = []
     private let tableView = UITableView()
@@ -105,7 +106,7 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     private func reload() {
-        users = UserManager.shared.allUsers()
+        users = viewModel.users
         filteredUsers = users
         tableView.reloadData()
         updateEmptyState()
@@ -192,7 +193,7 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
 
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
         alert.addAction(UIAlertAction(title: "Eliminar", style: .destructive) { [weak self] _ in
-            UserManager.shared.deleteUser(id: user.id)
+            self?.viewModel.delete(id: user.id)
             self?.reload()
         })
 
