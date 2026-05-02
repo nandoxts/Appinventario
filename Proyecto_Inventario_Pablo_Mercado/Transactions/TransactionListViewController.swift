@@ -46,7 +46,7 @@ class TransactionListViewController: UIViewController, UISearchBarDelegate, Tran
     private func setupTable() {
         filteredTransactions = viewModel.transactions
         transactionTable = TransactionTableView(transactions: filteredTransactions)
-        transactionTable.transactionDelegate = self // Configurar delegate
+        transactionTable.transactionDelegate = self
         view.addSubview(transactionTable)
         transactionTable.translatesAutoresizingMaskIntoConstraints = false
 
@@ -72,7 +72,7 @@ class TransactionListViewController: UIViewController, UISearchBarDelegate, Tran
         titleLabel.font = .boldSystemFont(ofSize: 18)
         
         let subtitleLabel = UILabel()
-        subtitleLabel.text = isAdmin() ? "Presiona + para registrar el primero" : "A\u00fan no hay transacciones registradas"
+        subtitleLabel.text = isAdmin() ? "Presiona + para registrar el primero" : "Aún no hay transacciones registradas"
         subtitleLabel.textAlignment = .center
         subtitleLabel.textColor = .systemGray2
         subtitleLabel.font = .systemFont(ofSize: 14)
@@ -141,7 +141,6 @@ class TransactionListViewController: UIViewController, UISearchBarDelegate, Tran
     // MARK: - TransactionTableViewDelegate
     
     func transactionTableView(_ tableView: TransactionTableView, didSelectTransaction transaction: Transaction) {
-        // Mostrar menú de opciones
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
