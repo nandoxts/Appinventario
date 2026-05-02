@@ -2,6 +2,7 @@ import UIKit
 
 class CreateAdminViewController: UIViewController {
 
+    private let viewModel = UserViewModel()
     private let nameTF = UITextField.form(placeholder: "Nombre")
     private let emailTF = UITextField.form(placeholder: "Correo")
     private let passTF = UITextField.form(
@@ -42,7 +43,7 @@ class CreateAdminViewController: UIViewController {
 
     @objc private func save() {
 
-        let result = UserManager.shared.createUser(
+        let result = viewModel.create(
             name: nameTF.text ?? "",
             email: emailTF.text ?? "",
             password: passTF.text ?? "",

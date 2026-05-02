@@ -8,6 +8,7 @@ class UserFormViewController: UIViewController {
     let roleSegment = UISegmentedControl(items: ["Admin", "Trabajador"])
     let saveBtn = UIButton.primary(title: "Guardar")
 
+    private let viewModel = UserViewModel()
     private let user: AppUser?
     let completion: () -> Void
 
@@ -57,14 +58,14 @@ class UserFormViewController: UIViewController {
         let result: Result<Void, UserError>
 
         if let user = user {
-            result = UserManager.shared.updateUser(
+            result = viewModel.update(
                 id: user.id,
                 name: nameTF.text ?? "",
                 email: emailTF.text ?? "",
                 role: role
             )
         } else {
-            result = UserManager.shared.createUser(
+            result = viewModel.create(
                 name: nameTF.text ?? "",
                 email: emailTF.text ?? "",
                 password: passTF.text ?? "",

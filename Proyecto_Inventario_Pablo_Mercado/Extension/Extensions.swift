@@ -25,15 +25,15 @@ extension UIViewController {
     
     // MARK: - Role-based access
     func isAdmin() -> Bool {
-        return UserManager.shared.currentRole() == .admin
+        return AppDependencies.shared.authUseCases.currentRole() == .admin
     }
-    
+
     func isWorker() -> Bool {
-        return UserManager.shared.currentRole() == .worker
+        return AppDependencies.shared.authUseCases.currentRole() == .worker
     }
-    
+
     func getCurrentRole() -> UserRole {
-        return UserManager.shared.currentRole()
+        return AppDependencies.shared.authUseCases.currentRole()
     }
     
     func requireAdmin() -> Bool {

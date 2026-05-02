@@ -53,9 +53,8 @@ final class DataManager {
     // MARK: - Products
     @discardableResult
     func addProduct(_ product: Product) -> Bool {
-        queue.async(flags: .barrier) {
-            var newProduct = product
-            newProduct = Product(id: self.nextProductId, name: product.name, price: product.price, stock: product.stock, category: product.category)
+        queue.sync(flags: .barrier) {
+            let newProduct = Product(id: self.nextProductId, name: product.name, price: product.price, stock: product.stock, category: product.category)
             self.nextProductId += 1
             self.products.append(newProduct)
             self.saveProducts()
@@ -66,7 +65,7 @@ final class DataManager {
     @discardableResult
     func updateProduct(_ product: Product) -> Bool {
         var updated = false
-        queue.async(flags: .barrier) {
+        queue.sync(flags: .barrier) {
             if let index = self.products.firstIndex(where: { $0.id == product.id }) {
                 self.products[index] = product
                 updated = true

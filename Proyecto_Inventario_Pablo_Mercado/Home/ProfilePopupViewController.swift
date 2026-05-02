@@ -86,7 +86,7 @@ class ProfilePopupViewController: UIViewController {
         emailLabel.textAlignment = .center
         
         roleLabel = UILabel()
-        let currentRole = UserManager.shared.currentRole()
+        let currentRole = AppDependencies.shared.authUseCases.currentRole()
         roleLabel.text = currentRole.displayName
         roleLabel.font = .systemFont(ofSize: 13, weight: .medium)
         roleLabel.textColor = .systemBlue
@@ -219,6 +219,15 @@ class ProfilePopupViewController: UIViewController {
             let newUsername = alert.textFields?[0].text ?? self.username
             let newEmail = alert.textFields?[1].text ?? self.email
 
+            if let currentUser = AppDependencies.shared.authUseCases.currentUser() {
+                _ = AppDependencies.shared.userManagementUseCases.update(
+                    id: currentUser.id,
+                    name: newUsername,
+                    email: newEmail,
+                    role: currentUser.role
+                )
+            }
+
             UserDefaults.standard.set(newUsername, forKey: "username")
             UserDefaults.standard.set(newEmail, forKey: "email")
 
@@ -245,7 +254,7 @@ class ProfilePopupViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
         alert.addAction(UIAlertAction(title: "Cerrar", style: .destructive) { [weak self] _ in
-            UserManager.shared.logout()
+            AppDependencies.shared.authUseCases.logout()
 
             if let sceneDelegate = self?.view.window?.windowScene?.delegate as? SceneDelegate {
                 let loginVC = LoginViewController()

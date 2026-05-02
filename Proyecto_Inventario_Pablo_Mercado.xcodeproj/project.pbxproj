@@ -51,6 +51,19 @@
 		B5F223CC2EF0765E00C4880D /* EmailTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CD2EF0765F00C4880D /* EmailTemplates.swift */; };
 		B5F223CE2EF0766000C4880D /* TransactionEmailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F223CF2EF0766100C4880D /* TransactionEmailService.swift */; };
 		B5D223D02EF0766200C4880D /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D223D12EF0766300C4880D /* UserCell.swift */; };
+		AA0100022EF0770000C48900 /* ProductRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0100012EF0770000C48900 /* ProductRepositoryProtocol.swift */; };
+		AA0100042EF0770000C48900 /* TransactionRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0100032EF0770000C48900 /* TransactionRepositoryProtocol.swift */; };
+		AA0100062EF0770000C48900 /* UserRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0100052EF0770000C48900 /* UserRepositoryProtocol.swift */; };
+		BB0100022EF0770000C48900 /* ProductUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0100012EF0770000C48900 /* ProductUseCases.swift */; };
+		BB0100042EF0770000C48900 /* TransactionUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0100032EF0770000C48900 /* TransactionUseCases.swift */; };
+		BB0100062EF0770000C48900 /* AuthUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0100052EF0770000C48900 /* AuthUseCases.swift */; };
+		BB0100082EF0770000C48900 /* UserManagementUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0100072EF0770000C48900 /* UserManagementUseCases.swift */; };
+		BB01000A2EF0770000C48900 /* ReportUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0100092EF0770000C48900 /* ReportUseCases.swift */; };
+		AA0100242EF0770000C48900 /* DefaultProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0100232EF0770000C48900 /* DefaultProductRepository.swift */; };
+		AA0100262EF0770000C48900 /* DefaultTransactionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0100252EF0770000C48900 /* DefaultTransactionRepository.swift */; };
+		AA0100282EF0770000C48900 /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0100272EF0770000C48900 /* DefaultUserRepository.swift */; };
+		AA01002A2EF0770000C48900 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0100292EF0770000C48900 /* AppDependencies.swift */; };
+		AA01002C2EF0770000C48900 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01002B2EF0770000C48900 /* UserViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +113,19 @@
 		B5F223CD2EF0765F00C4880D /* EmailTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTemplates.swift; sourceTree = "<group>"; };
 		B5F223CF2EF0766100C4880D /* TransactionEmailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEmailService.swift; sourceTree = "<group>"; };
 		B5D223D12EF0766300C4880D /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		AA0100012EF0770000C48900 /* ProductRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepositoryProtocol.swift; sourceTree = "<group>"; };
+		AA0100032EF0770000C48900 /* TransactionRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepositoryProtocol.swift; sourceTree = "<group>"; };
+		AA0100052EF0770000C48900 /* UserRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryProtocol.swift; sourceTree = "<group>"; };
+		BB0100012EF0770000C48900 /* ProductUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUseCases.swift; sourceTree = "<group>"; };
+		BB0100032EF0770000C48900 /* TransactionUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionUseCases.swift; sourceTree = "<group>"; };
+		BB0100052EF0770000C48900 /* AuthUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCases.swift; sourceTree = "<group>"; };
+		BB0100072EF0770000C48900 /* UserManagementUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagementUseCases.swift; sourceTree = "<group>"; };
+		BB0100092EF0770000C48900 /* ReportUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUseCases.swift; sourceTree = "<group>"; };
+		AA0100232EF0770000C48900 /* DefaultProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProductRepository.swift; sourceTree = "<group>"; };
+		AA0100252EF0770000C48900 /* DefaultTransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTransactionRepository.swift; sourceTree = "<group>"; };
+		AA0100272EF0770000C48900 /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
+		AA0100292EF0770000C48900 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		AA01002B2EF0770000C48900 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +158,8 @@
 		B5D223602EF05FCE00C4880D /* Proyecto_Inventario_Pablo_Mercado */ = {
 			isa = PBXGroup;
 			children = (
+				AA0200012EF0770000C48900 /* Domain */,
+				AA0200092EF0770000C48900 /* Data */,
 				B5E223CA2EF0765C00C4880D /* Users */,
 				B5D223B12EF0680600C4880D /* Splash */,
 				B5D223A92EF065D800C4880D /* Reporte */,
@@ -150,6 +178,55 @@
 				B5D2236F2EF05FD100C4880D /* Info.plist */,
 			);
 			path = Proyecto_Inventario_Pablo_Mercado;
+			sourceTree = "<group>";
+		};
+		AA0200012EF0770000C48900 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				AA0200022EF0770000C48900 /* Repositories */,
+				AA0200032EF0770000C48900 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		AA0200022EF0770000C48900 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AA0100012EF0770000C48900 /* ProductRepositoryProtocol.swift */,
+				AA0100032EF0770000C48900 /* TransactionRepositoryProtocol.swift */,
+				AA0100052EF0770000C48900 /* UserRepositoryProtocol.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		AA0200032EF0770000C48900 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				BB0100012EF0770000C48900 /* ProductUseCases.swift */,
+				BB0100032EF0770000C48900 /* TransactionUseCases.swift */,
+				BB0100052EF0770000C48900 /* AuthUseCases.swift */,
+				BB0100072EF0770000C48900 /* UserManagementUseCases.swift */,
+				BB0100092EF0770000C48900 /* ReportUseCases.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		AA0200092EF0770000C48900 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AA02000A2EF0770000C48900 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AA02000A2EF0770000C48900 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AA0100232EF0770000C48900 /* DefaultProductRepository.swift */,
+				AA0100252EF0770000C48900 /* DefaultTransactionRepository.swift */,
+				AA0100272EF0770000C48900 /* DefaultUserRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		B5D223752EF0600700C4880D /* Home */ = {
@@ -186,6 +263,7 @@
 		B5D223792EF0604000C4880D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				AA02000B2EF0770000C48900 /* DI */,
 				B5D2237C2EF0606D00C4880D /* Constants.swift */,
 				B5D2237D2EF0606D00C4880D /* DataManager.swift */,
 				B5E223BF2EF0765100C4880D /* UserManager.swift */,
@@ -194,6 +272,14 @@
 				B5F223CF2EF0766100C4880D /* TransactionEmailService.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		AA02000B2EF0770000C48900 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				AA0100292EF0770000C48900 /* AppDependencies.swift */,
+			);
+			path = DI;
 			sourceTree = "<group>";
 		};
 		B5D2237A2EF0604600C4880D /* Products */ = {
@@ -257,6 +343,7 @@
 			children = (
 				B5E223C72EF0765900C4880D /* UserListViewController.swift */,
 				B5E223C92EF0765B00C4880D /* UserFormViewController.swift */,
+				AA01002B2EF0770000C48900 /* UserViewModel.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -373,6 +460,19 @@
 				B5F223CC2EF0765E00C4880D /* EmailTemplates.swift in Sources */,
 				B5F223CE2EF0766000C4880D /* TransactionEmailService.swift in Sources */,
 				B5D223D02EF0766200C4880D /* UserCell.swift in Sources */,
+				AA0100022EF0770000C48900 /* ProductRepositoryProtocol.swift in Sources */,
+				AA0100042EF0770000C48900 /* TransactionRepositoryProtocol.swift in Sources */,
+				AA0100062EF0770000C48900 /* UserRepositoryProtocol.swift in Sources */,
+				BB0100022EF0770000C48900 /* ProductUseCases.swift in Sources */,
+				BB0100042EF0770000C48900 /* TransactionUseCases.swift in Sources */,
+				BB0100062EF0770000C48900 /* AuthUseCases.swift in Sources */,
+				BB0100082EF0770000C48900 /* UserManagementUseCases.swift in Sources */,
+				BB01000A2EF0770000C48900 /* ReportUseCases.swift in Sources */,
+				AA0100242EF0770000C48900 /* DefaultProductRepository.swift in Sources */,
+				AA0100262EF0770000C48900 /* DefaultTransactionRepository.swift in Sources */,
+				AA0100282EF0770000C48900 /* DefaultUserRepository.swift in Sources */,
+				AA01002A2EF0770000C48900 /* AppDependencies.swift in Sources */,
+				AA01002C2EF0770000C48900 /* UserViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
